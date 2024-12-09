@@ -1,5 +1,7 @@
 package enums;
 
-public class Language {
-
+public enum Language {
+    KZ,
+    RU,
+    EN
 }

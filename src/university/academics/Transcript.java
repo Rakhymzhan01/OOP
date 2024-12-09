@@ -53,14 +53,10 @@ public class Transcript {
     }
 
     public double calcGPA() {
-        // Placeholder logic for GPA calculation
-        // Replace with actual GPA calculation based on courses and grades
-        return 3.5; // Example GPA
+        return 3.5; // Placeholder for GPA calculation
     }
 
     public void generateTranscriptPDF() {
-        // Placeholder for generating a PDF
         System.out.println("Generating transcript PDF for " + name + " " + surname);
-        // Use libraries like Apache PDFBox or iText for actual PDF generation
     }
 }

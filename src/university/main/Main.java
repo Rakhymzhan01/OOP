@@ -4,6 +4,7 @@ import university.utils.FileHandler;
 import university.core.Student;
 import university.core.Teacher;
 import university.core.Manager;
+import university.news.News;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -103,13 +104,16 @@ public class Main {
 
         if (authenticate(username, password, STUDENT_FILE, new TypeToken<List<Student>>() {}.getType())) {
             System.out.println("Welcome, student!");
-            // Call student-specific menu here
+            displayNews(); // Display news for students
         } else if (authenticate(username, password, TEACHER_FILE, new TypeToken<List<Teacher>>() {}.getType())) {
             System.out.println("Welcome, teacher!");
-            // Call teacher-specific menu here
+            displayNews(); // Display news for teachers
         } else if (authenticate(username, password, MANAGER_FILE, new TypeToken<List<Manager>>() {}.getType())) {
             System.out.println("Welcome, manager!");
-            // Call manager-specific menu here
+            Manager manager = getManager(username, password); // Fetch the Manager object
+            if (manager != null) {
+                manager.viewMenu(); // Call the manager-specific menu
+            }
         } else {
             System.out.println("Invalid credentials. Please try again.");
         }
@@ -135,5 +139,29 @@ public class Main {
             }
         }
         return false;
+    }
+
+    // Display news for students and teachers
+    private static void displayNews() {
+        System.out.println("Latest News:");
+        List<News> newsList = FileHandler.loadFromFile("src/university/data/news.json", new TypeToken<List<News>>() {}.getType());
+        if (newsList == null || newsList.isEmpty()) {
+            System.out.println("No news available.");
+        } else {
+            for (News news : newsList) {
+                System.out.println(news);
+            }
+        }
+    }
+
+    // Fetch manager object
+    private static Manager getManager(String username, String password) {
+        List<Manager> managers = FileHandler.loadFromFile(MANAGER_FILE, new TypeToken<List<Manager>>() {}.getType());
+        for (Manager manager : managers) {
+            if (manager.getUsername().equals(username) && manager.getPassword().equals(password)) {
+                return manager;
+            }
+        }
+        return null;
     }
 }

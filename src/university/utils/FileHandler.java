@@ -11,6 +11,7 @@ import java.util.List;
 public class FileHandler {
     private static final Gson gson = new Gson();
 
+    // Load data from a JSON file
     public static <T> List<T> loadFromFile(String fileName, Type typeOfList) {
         File file = new File(fileName);
 
@@ -35,6 +36,7 @@ public class FileHandler {
         }
     }
 
+    // Save data to a JSON file
     public static <T> void saveToFile(List<T> data, String fileName) {
         try (Writer writer = new FileWriter(fileName)) {
             gson.toJson(data, writer);
@@ -42,5 +44,29 @@ public class FileHandler {
             System.err.println("Error writing to file: " + fileName);
             e.printStackTrace();
         }
+    }
+
+    // Add a single entry to a JSON file
+    public static <T> void addEntry(T entry, String fileName, Type typeOfList) {
+        List<T> data = loadFromFile(fileName, typeOfList);
+        data.add(entry);
+        saveToFile(data, fileName);
+    }
+
+    // Remove an entry from a JSON file
+    public static <T> void removeEntry(T entry, String fileName, Type typeOfList) {
+        List<T> data = loadFromFile(fileName, typeOfList);
+        data.remove(entry);
+        saveToFile(data, fileName);
+    }
+
+    // Update an entry in a JSON file
+    public static <T> void updateEntry(T oldEntry, T newEntry, String fileName, Type typeOfList) {
+        List<T> data = loadFromFile(fileName, typeOfList);
+        int index = data.indexOf(oldEntry);
+        if (index != -1) {
+            data.set(index, newEntry);
+        }
+        saveToFile(data, fileName);
     }
 }

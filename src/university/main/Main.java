@@ -5,6 +5,7 @@ import university.core.Student;
 import university.core.Teacher;
 import university.core.Manager;
 import university.news.News;
+import university.core.User;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -102,22 +103,44 @@ public class Main {
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
 
-        if (authenticate(username, password, STUDENT_FILE, new TypeToken<List<Student>>() {}.getType())) {
-            System.out.println("Welcome, student!");
-            displayNews(); // Display news for students
-        } else if (authenticate(username, password, TEACHER_FILE, new TypeToken<List<Teacher>>() {}.getType())) {
-            System.out.println("Welcome, teacher!");
-            displayNews(); // Display news for teachers
-        } else if (authenticate(username, password, MANAGER_FILE, new TypeToken<List<Manager>>() {}.getType())) {
-            System.out.println("Welcome, manager!");
-            Manager manager = getManager(username, password); // Fetch the Manager object
-            if (manager != null) {
-                manager.viewMenu(); // Call the manager-specific menu
-            }
-        } else {
-            System.out.println("Invalid credentials. Please try again.");
+        // Check for Student login
+        Student student = getUser(username, password, STUDENT_FILE, new TypeToken<List<Student>>() {}.getType());
+        if (student != null) {
+            System.out.println("Welcome, " + student.getFirstName() + "!");
+            student.viewMenu(); // Call Student menu
+            return; // Prevent returning to the main menu
         }
+
+        // Check for Teacher login
+        Teacher teacher = getUser(username, password, TEACHER_FILE, new TypeToken<List<Teacher>>() {}.getType());
+        if (teacher != null) {
+            System.out.println("Welcome, " + teacher.getFirstName() + "!");
+            teacher.viewMenu(); // Call Teacher menu
+            return; // Prevent returning to the main menu
+        }
+
+        // Check for Manager login
+        Manager manager = getUser(username, password, MANAGER_FILE, new TypeToken<List<Manager>>() {}.getType());
+        if (manager != null) {
+            System.out.println("Welcome, " + manager.getFirstName() + "!");
+            manager.viewMenu(); // Call Manager menu
+            return; // Prevent returning to the main menu
+        }
+
+        // If authentication fails
+        System.out.println("Invalid credentials. Please try again.");
     }
+
+    private static <T> T getUser(String username, String password, String fileName, Type type) {
+        List<T> users = FileHandler.loadFromFile(fileName, type);
+        for (T user : users) {
+            if (user instanceof User u && u.getUsername().equals(username) && u.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
 
     // Save user to JSON file
     private static <T> void saveUser(T user, String fileName, Type type) {

@@ -1,14 +1,13 @@
 package university.academics;
 
 public class Grade {
-    private String student; // Username of the student
-    private String course; // Course ID
-    private int firstAttestation; // Marks for the first attestation
-    private int secondAttestation; // Marks for the second attestation
-    private int finalExam; // Marks for the final exam
+    private String student;
+    private String course;
+    private double firstAttestation;
+    private double secondAttestation;
+    private double finalExam;
 
-    // Constructor
-    public Grade(String student, String course, int firstAttestation, int secondAttestation, int finalExam) {
+    public Grade(String student, String course, double firstAttestation, double secondAttestation, double finalExam) {
         this.student = student;
         this.course = course;
         this.firstAttestation = firstAttestation;
@@ -16,54 +15,54 @@ public class Grade {
         this.finalExam = finalExam;
     }
 
-    // Getters
     public String getStudent() {
         return student;
+    }
+
+    public void setStudent(String student) {
+        this.student = student;
     }
 
     public String getCourse() {
         return course;
     }
 
-    public int getFirstAttestation() {
-        return firstAttestation;
-    }
-
-    public int getSecondAttestation() {
-        return secondAttestation;
-    }
-
-    public int getFinalExam() {
-        return finalExam;
-    }
-
-    // Setters
-    public void setStudent(String student) {
-        this.student = student;
-    }
-
     public void setCourse(String course) {
         this.course = course;
     }
 
-    public void setFirstAttestation(int firstAttestation) {
+    public double getFirstAttestation() {
+        return firstAttestation;
+    }
+
+    public void setFirstAttestation(double firstAttestation) {
         this.firstAttestation = firstAttestation;
     }
 
-    public void setSecondAttestation(int secondAttestation) {
+    public double getSecondAttestation() {
+        return secondAttestation;
+    }
+
+    public void setSecondAttestation(double secondAttestation) {
         this.secondAttestation = secondAttestation;
     }
 
-    public void setFinalExam(int finalExam) {
+    public double getFinalExam() {
+        return finalExam;
+    }
+
+    public void setFinalExam(double finalExam) {
         this.finalExam = finalExam;
     }
 
-    // Override toString for display purposes
     @Override
     public String toString() {
-        return "Course: " + course +
-                ", First Attestation: " + firstAttestation +
-                ", Second Attestation: " + secondAttestation +
-                ", Final Exam: " + finalExam;
+        return "Grade{" +
+                "student='" + student + '\'' +
+                ", course='" + course + '\'' +
+                ", firstAttestation=" + firstAttestation +
+                ", secondAttestation=" + secondAttestation +
+                ", finalExam=" + finalExam +
+                '}';
     }
 }

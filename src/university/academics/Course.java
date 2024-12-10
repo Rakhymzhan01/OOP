@@ -2,6 +2,9 @@ package university.academics;
 
 import university.core.Teacher;
 import java.util.List;
+import university.utils.FileHandler;
+import com.google.gson.reflect.TypeToken;
+
 
 public class Course {
     private String id;
@@ -57,4 +60,18 @@ public class Course {
     public void setStudentsEnrolled(List<String> studentsEnrolled) {
         this.studentsEnrolled = studentsEnrolled;
     }
+
+    private List<String> getEnrolledStudents(String courseId) {
+        List<Course> courses = FileHandler.loadFromFile("src/university/data/courses.json",
+                new TypeToken<List<Course>>() {}.getType());
+
+        for (Course course : courses) {
+            if (course.getId().equals(courseId)) {
+                return course.getStudentsEnrolled();
+            }
+        }
+
+        return List.of(); // Return an empty list if no course matches
+    }
+
 }

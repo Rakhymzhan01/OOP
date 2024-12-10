@@ -10,6 +10,7 @@ import university.academics.Grade; // For Grade class
 import university.academics.Attendance; // For Attendance class (if defined)
 import university.utils.FileHandler; // For FileHandler class
 import com.google.gson.reflect.TypeToken; // For TypeToken with Gson
+import university.academics.Course;
 
 
 public class Student extends User {
@@ -120,4 +121,32 @@ public class Student extends User {
         else if (totalGrade >= 60) return "D";
         else return "F";
     }
+
+    public void viewCourses() {
+        List<Course> courses = FileHandler.loadFromFile("src/university/data/courses.json",
+                new com.google.gson.reflect.TypeToken<List<Course>>() {}.getType());
+
+        System.out.println("\nCourses Enrolled:");
+        for (Course course : courses) {
+            if (course.getStudentsEnrolled().contains(getUsername())) {
+                System.out.println("- " + course.getName());
+            }
+        }
+    }
+
+
+    public void viewGrades() {
+        List<Grade> grades = FileHandler.loadFromFile("src/university/data/grades.json",
+                new com.google.gson.reflect.TypeToken<List<Grade>>() {}.getType());
+
+        System.out.println("\nYour Grades:");
+        for (Grade grade : grades) {
+            if (grade.getStudent().equals(getUsername())) {
+                System.out.println("- " + grade.getCourse() + ": First Attestation: " + grade.getFirstAttestation()
+                        + ", Second Attestation: " + grade.getSecondAttestation()
+                        + ", Final Exam: " + grade.getFinalExam());
+            }
+        }
+    }
+
 }

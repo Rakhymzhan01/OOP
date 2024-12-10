@@ -40,18 +40,33 @@ public class Mark {
     }
 
     public String getLiteralMark() {
-        int a =  firstAttestation + secondAttestation + finalExam;
-        if(a>100){String t="A";return t;}
-        else if(a>=95 && a<=100){String t="A";return t;}
-        else if(a>=90 && a<=94){String t="A-";return t;}
-        else if(a>=85 && a<=89){String t="B+";return t;}
-        else if(a>=80 && a<=84){String t="B";return t;}
-        else if(a>=75 && a<=79){String t="B-";return t;}
-        else if(a>=70 && a<=74){String t="C+";return t;}
-        else if(a>=65 && a<=69){String t="C";return t;}
-        else if(a>=60 && a<=64){String t="C-";return t;}
-        else if(a>=55 && a<=59){String t="D+";return t;}
-        else if(a>=50 && a<=54){String t="D";return t;}
-        else {String t="F";return t;}
+        // Explicitly cast to integer
+        int a = (int) (firstAttestation + secondAttestation + finalExam);
+
+        if (a > 100) {
+            return "A";
+        } else if (a >= 95) {
+            return "A";
+        } else if (a >= 90) {
+            return "A-";
+        } else if (a >= 85) {
+            return "B+";
+        } else if (a >= 80) {
+            return "B";
+        } else if (a >= 75) {
+            return "B-";
+        } else if (a >= 70) {
+            return "C+";
+        } else if (a >= 65) {
+            return "C";
+        } else if (a >= 60) {
+            return "C-";
+        } else if (a >= 55) {
+            return "D+";
+        } else if (a >= 50) {
+            return "D";
+        } else {
+            return "F";
+        }
     }
 }

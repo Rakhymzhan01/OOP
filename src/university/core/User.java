@@ -29,4 +29,6 @@ public abstract class User {
     public String getLastName() {
         return lastName;
     }
+
+    public abstract void viewMenu();
 }

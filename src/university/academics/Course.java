@@ -1,6 +1,11 @@
 package university.academics;
 
 import java.util.Vector;
+import university.core.Teacher;
+import university.enums.TypeCourse;
+import university.core.Student;
+
+import java.util.Vector;
 
 public class Course {
     private int id;

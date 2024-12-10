@@ -1,7 +1,7 @@
 package university.enums;
 
-public class LessonType {
+public enum LessonType {
     LECTURE,
     PRACTICE,
-    LABARATORY
+    LABORATORY
 }

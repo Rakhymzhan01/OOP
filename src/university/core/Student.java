@@ -1,5 +1,17 @@
 package university.core;
 
+import java.util.List; // For List usage
+import java.util.ArrayList; // If needed for List initialization
+import java.util.Scanner; // For user input
+import java.io.Writer; // For writing files
+import java.io.FileWriter; // For file writing
+import java.io.IOException; // For handling IO exceptions
+import university.academics.Grade; // For Grade class
+import university.academics.Attendance; // For Attendance class (if defined)
+import university.utils.FileHandler; // For FileHandler class
+import com.google.gson.reflect.TypeToken; // For TypeToken with Gson
+
+
 public class Student extends User {
     private String faculty;
 

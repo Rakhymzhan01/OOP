@@ -1,5 +1,8 @@
 package university.academics;
 
+import university.enums.LessonType;
+import university.core.Teacher;
+
 public class Lesson {
     private String name;
     private LessonType type;

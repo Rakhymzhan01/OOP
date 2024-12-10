@@ -1,4 +1,4 @@
-package enums;
+package university.enums;
 
 public class LessonType {
     LECTURE,

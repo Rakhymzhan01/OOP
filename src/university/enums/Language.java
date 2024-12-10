@@ -1,7 +1,17 @@
-package enums;
+package university.enums;
 
 public enum Language {
-    KZ,
-    RU,
-    EN
+    ENGLISH("English"),
+    RUSSIAN("Русский"),
+    KAZAKH("Қазақша");
+
+    private final String displayName;
+
+    Language(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
 }

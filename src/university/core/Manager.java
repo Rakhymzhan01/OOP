@@ -5,7 +5,6 @@ import university.utils.FileHandler;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,16 +23,18 @@ public class Manager extends User {
             System.out.println("\nManager Menu:");
             System.out.println("1 - View News");
             System.out.println("2 - Add News");
-            System.out.println("3 - Logout");
+            System.out.println("3 - Delete News");
+            System.out.println("4 - Logout");
             System.out.print("Enter your choice: ");
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
 
             switch (choice) {
-                case 1 -> viewNews(); // View all news
-                case 2 -> addNews();  // Add new news
-                case 3 -> {
+                case 1 -> viewNews();   // View all news
+                case 2 -> addNews();    // Add new news
+                case 3 -> deleteNews(); // Delete news
+                case 4 -> {
                     System.out.println("Logging out...");
                     return; // Exit manager menu
                 }
@@ -49,8 +50,8 @@ public class Manager extends User {
             System.out.println("No news available.");
         } else {
             System.out.println("\nLatest News:");
-            for (News news : newsList) {
-                System.out.println(news);
+            for (int i = 0; i < newsList.size(); i++) {
+                System.out.println((i + 1) + ". " + newsList.get(i));
             }
         }
     }
@@ -71,6 +72,29 @@ public class Manager extends User {
         FileHandler.saveToFile(newsList, NEWS_FILE);
 
         System.out.println("News added successfully!");
+    }
+
+    // Delete a news item
+    public void deleteNews() {
+        List<News> newsList = loadNews();
+        if (newsList.isEmpty()) {
+            System.out.println("No news available to delete.");
+            return;
+        }
+
+        viewNews();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of the news to delete: ");
+        int newsNumber = scanner.nextInt();
+
+        if (newsNumber < 1 || newsNumber > newsList.size()) {
+            System.out.println("Invalid choice. Please try again.");
+        } else {
+            newsList.remove(newsNumber - 1);
+            FileHandler.saveToFile(newsList, NEWS_FILE);
+            System.out.println("News deleted successfully!");
+        }
     }
 
     // Load news from JSON

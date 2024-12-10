@@ -1,57 +1,29 @@
 package university.academics;
 
-import java.util.Vector;
 import university.core.Teacher;
-import university.enums.TypeCourse;
-import university.core.Student;
-
-import java.util.Vector;
+import java.util.List;
 
 public class Course {
-    private int id;
-    private int credits;
-    private Vector<Teacher> teachers;
+    private String id;
     private String name;
-    private TypeCourse type;
-    private String prerequisite;
+    private int credits;
+    private Teacher teacher;
+    private List<String> studentsEnrolled; // Store student usernames
 
-    public Course(int id, int credits, String name, TypeCourse type, String prerequisite) {
+    public Course(String id, String name, int credits, Teacher teacher) {
         this.id = id;
-        this.credits = credits;
-        this.teachers = new Vector<>();
         this.name = name;
-        this.type = type;
-        this.prerequisite = prerequisite;
+        this.credits = credits;
+        this.teacher = teacher;
     }
 
-    public int getId() {
+    // Getters and setters
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public int getCredits() {
-        return credits;
-    }
-
-    public void setCredits(int credits) {
-        this.credits = credits;
-    }
-
-    public Vector<Teacher> getTeachers() {
-        return teachers;
-    }
-
-    public void addTeacher(Teacher teacher) {
-        if (!teachers.contains(teacher)) {
-            teachers.add(teacher);
-        }
-    }
-
-    public void removeTeacher(Teacher teacher) {
-        teachers.remove(teacher);
     }
 
     public String getName() {
@@ -62,27 +34,27 @@ public class Course {
         this.name = name;
     }
 
-    public TypeCourse getType() {
-        return type;
+    public int getCredits() {
+        return credits;
     }
 
-    public void setType(TypeCourse type) {
-        this.type = type;
+    public void setCredits(int credits) {
+        this.credits = credits;
     }
 
-    public String getPrerequisite() {
-        return prerequisite;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setPrerequisite(String prerequisite) {
-        this.prerequisite = prerequisite;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
-    public void addStudent(Student student) {
-        System.out.println("Adding student to the course: " + student.getName());
+    public List<String> getStudentsEnrolled() {
+        return studentsEnrolled;
     }
 
-    public void removeStudent(Student student) {
-        System.out.println("Removing student from the course: " + student.getName());
+    public void setStudentsEnrolled(List<String> studentsEnrolled) {
+        this.studentsEnrolled = studentsEnrolled;
     }
 }
